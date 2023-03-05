@@ -25,6 +25,16 @@ spec:
             configMapKeyRef:
               name: sql-config
               key: sql-url 
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: sql-config
+              key: sql-name
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: sql-secret
+              key: sql-user            
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:

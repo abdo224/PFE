@@ -1,7 +1,7 @@
 FROM python:3.8
 
 ENV PYTHONUNBUFFERED=1
-ENV DB_NAME=sql-db
+ENV DB_NAME=django-app-db
 ENV DB_USER=root
 ENV DB_PASSWORD=
 ENV DB_HOST=db

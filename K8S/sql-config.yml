@@ -5,4 +5,3 @@ metadata:
 data:
    sql-url: sql-service
    sql-name: django-app-db
-   

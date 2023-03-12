@@ -1,40 +1,53 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: db-pod
+  name: mysql
 spec:
-  containers:
-  - name: db-container
-    image: mysql:latest
-    env:
-    - name: MYSQL_DATABASE
-      value: django-app-db
-
-    - name: MYSQL_ROOT_PASSWORD
-      value: root_pw
-
-    - name: MYSQL_USER
-      value: djawed
-
-    - name: MYSQL_PASSWORD
-      value: djawed
-
-    ports:
-    - containerPort: 3306
-
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:latest
+        env:
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: db_name
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: db_user
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: db_password
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: db_root_password
+        ports:
+        - containerPort: 3306
 ---
-# service to expose this application
-
 apiVersion: v1
 kind: Service
 metadata:
-  name: db
+  name: mysql-service
 spec:
   selector:
-    app: db-pod
+    app: mysql
   ports:
-  - protocol: TCP
+  - name: mysql
     port: 3306
     targetPort: 3306
-
 

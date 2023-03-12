@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: django-test
+  labels:
+    app: django-test
+spec:
+  containers:
+  - name: django-test
+    image: djawed22/repo:debug
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    ports:
+    - containerPort: 8000
+
+  - name: db
+    image: mysql:latest
+    env:
+    - name: MYSQL_DATABASE
+      value: django-app-db
+
+    - name: MYSQL_ROOT_PASSWORD
+      value: root_pw
+
+    - name: MYSQL_USER
+      value: djawed
+
+    - name: MYSQL_PASSWORD
+      value: djawed 
+
+    ports:
+    - containerPort: 3306
+
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: django-service
+spec:
+  selector:
+    app: django-test
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000

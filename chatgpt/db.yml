@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql
+  namespace: staging
 spec:
   replicas: 1
   selector:
@@ -18,9 +19,9 @@ spec:
         env:
         - name: MYSQL_DATABASE
           valueFrom:
-            secretKeyRef:
-              name: db-secret
-              key: db_name
+            configMapKeyRef:
+              name: sql-configmap
+              key: db-name
         - name: MYSQL_USER
           valueFrom:
             secretKeyRef:

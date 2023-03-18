@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: django-app
+  namespace: staging
 spec:
   replicas: 1
   selector:
@@ -20,9 +21,9 @@ spec:
         env:
         - name: DB_NAME
           valueFrom:
-            secretKeyRef:
-              name: db-secret
-              key: db_name
+            configMapKeyRef:
+              name: sql-configmap
+              key: db-name
         - name: DB_USER
           valueFrom:
             secretKeyRef:
@@ -34,7 +35,10 @@ spec:
               name: db-secret
               key: db_password
         - name: DB_HOST
-          value: mysql-service
+          valueFrom:
+            configMapKeyRef:
+              name: sql-configmap
+              key: sql-service
         - name: DB_PORT
           value: "3306"
 ---

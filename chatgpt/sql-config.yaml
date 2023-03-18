@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sql-configmap
+  namespace: staging
+data:
+  sql-service : mysql-service
+  db-name : django-app-db

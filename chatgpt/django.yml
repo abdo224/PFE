@@ -15,32 +15,20 @@ spec:
     spec:
       containers:
       - name: django-app
-        image: djawed22/repo:debug22
+        image: djawed22/repo:vtest
         ports:
         - containerPort: 8000
         env:
         - name: DB_NAME
-          valueFrom:
-            configMapKeyRef:
-              name: sql-configmap
-              key: db-name
+          value: 'django-app-db'
         - name: DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: db-secret
-              key: db_user
+          value: 'djawed'
         - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: db-secret
-              key: db_password
+          value: 'djawed'
         - name: DB_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: sql-configmap
-              key: sql-service
+          value: 'mysql-service'
         - name: DB_PORT
-          value: "3306"
+          value: '3306'
 ---
 apiVersion: v1
 kind: Service

@@ -16,40 +16,32 @@ spec:
     spec:
       containers:
       - name: django
-        # image: djawed22/repo:2.1
-        image: djawed22/repo:debug
-        # image: django:2.1
+        image: djawed22/repo:latest
         ports:
         - containerPort: 8000
+        command: ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
         env:
-        # - name: DB_URL
-        #   valueFrom:
-        #     configMapKeyRef:
-        #       name: sql-config
-        #       key: sql-url 
-        # - name: DB_NAME
-        #   valueFrom:
-        #     configMapKeyRef:
-        #       name: sql-config
-        #       key: sql-name
-        # - name: DB_USER
-        #   valueFrom:
-        #     secretKeyRef:
-        #       name: sql-secret
-        #       key: sql-database-user            
-        # - name: DB_PASSWORD
-        #   valueFrom:
-        #     secretKeyRef:
-        #       name: sql-secret
-        #       key: sql-database-user-password
-
-        # - name: DB_HOST
-        #   value: sql-service
-          # valueFrom:
-          #   configMapKeyRef:
-          #     name: sql-config
-          #     key: sql-url
----
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: sql-config
+              key: sql-url
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: sql-config
+              key: sql-name 
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: sql-secret
+              key: sql-username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sql-secret
+              key: sql-password
+---                               
 apiVersion: v1
 kind: Service
 metadata:

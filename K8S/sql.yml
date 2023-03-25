@@ -20,25 +20,31 @@ spec:
         ports:
         - containerPort: 3306
         env:
-        # - name: MYSQL_ROOT_PASSWORD
-        #   valueFrom:
-        #     secretKeyRef:
-        #       name: sql-secret
-        #       key: sql-database-user-password
-        - name: MYSQL_ALLOW_EMPTY_PASSWORD
-          value: "true"
-
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sql-secret
+              key: sql-root-password
         - name: MYSQL_DATABASE
-          value: django-app-db
-          # valueFrom:
-          #   configMapKeyRef:
-          #     name: sql-config
-          #     key: sql-name
+          valueFrom:
+            configMapKeyRef:
+              name: sql-config
+              key: sql-name
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: sql-secret
+              key: sql-username
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sql-secret
+              key: sql-password           
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: db
+  name: sql-service
 spec:
   selector:
     app: sql

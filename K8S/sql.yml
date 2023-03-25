@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: staging
   name: sql-deployment
   labels:
     app: sql
@@ -39,11 +40,19 @@ spec:
           valueFrom:
             secretKeyRef:
               name: sql-secret
-              key: sql-password           
+              key: sql-password  
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pvc
 ---
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: staging
   name: sql-service
 spec:
   selector:
@@ -51,4 +60,4 @@ spec:
   ports:
     - protocol: TCP
       port: 3306
-      targetPort: 3306
+      targetPort: 3306 

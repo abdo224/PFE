@@ -6,15 +6,16 @@ pipeline {
                 dockerHubRegistry = credentials('dockerhub')
             }
             steps {
-              sh  'docker images '  
+              dir('./mysite'){
 
-              script {
-                docker.withRegistry( 'https://registry.hub.docker.com' , 'dockerhub') {
-                    def dockerImage = docker.build("djawed22/repo:latest","-f mysite/Dockerfile .")
-                    dockerImage.push()
+
+                script {
+                   docker.withRegistry( 'https://registry.hub.docker.com' , 'dockerhub') {
+                      def dockerImage = docker.build("djawed22/repo:latest","-f mysite/Dockerfile .")
+                      dockerImage.push()
+                  }
                 }
-              }
-            }
+             }
         }
         stage('Test') {
             steps {

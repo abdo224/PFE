@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k8s-config
+data:
+   sql-url: mysql
+   sql-name: django-app-db

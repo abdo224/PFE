@@ -17,6 +17,8 @@ kubectl apply -f PV-PVC.yml
 
 kubectl apply -f sql.yml
 
+sleep 20
+
 #create a deployment for a django application 
 
 kubectl apply -f django.yml

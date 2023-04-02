@@ -7,7 +7,7 @@ pipeline {
             }
             steps {
               script {
-                docker.withRegistry( 'https://registry.hub.docker.com' , dockerHubRegistry) {
+                docker.withRegistry( 'https://registry.hub.docker.com' , 'dockerhub') {
                     def dockerImage = docker.build("djawed22/repo:latest","-f mysite/Dockerfile .")
                     dockerImage.push()
                 }

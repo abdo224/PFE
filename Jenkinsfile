@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Build docker images ') {
+        stage('Build docker images & puplish to docker hub registry') {
             environment {
                 dockerHubRegistry = credentials('dockerhub')
             }
@@ -16,16 +16,13 @@ pipeline {
              }
             }
         }    
-        stage('Test') {
+       stage('Deploy'){
             steps {
-                echo 'Testing... hhcds'
+                sh 'export KUBECONFIG=/etc/rancher/k3s/k3s.yaml'
+                sh 'helm upgrade --install k8s-native-staging ./k8s-native-chart -f ./values.yaml --namespace staging'
+                
             }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying...'
-            }
-        }
+       }
     
     }
   } 

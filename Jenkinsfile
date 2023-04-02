@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Testing... hh'
+                echo 'Testing... hhcds'
             }
         }
         stage('Deploy') {

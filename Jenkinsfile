@@ -2,9 +2,16 @@ pipeline {
     agent any
     stages {
         stage('Build docker images ') {
+            environment {
+                dockerHubRegistry = credentials('dockerhub')
+            }
             steps {
-              echo 'Building docker images...'
-              echo "hiiii"
+              script {
+                docker.withRegistry( '', dockerHubRegistry ) {
+                    def dockerImage = docker.build("djawed22/repo:latest","-f mysite/Dockerfile .")
+                    dockerImage.push()
+                }
+              }
             }
         }
         stage('Test') {

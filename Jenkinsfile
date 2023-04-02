@@ -1,9 +1,11 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Build docker images ') {
             steps {
-                echo 'Building...'
+                dir('./mysite'){
+                    sh ' docker build djawed22/repo:latest . '
+                }
             }
         }
         stage('Test') {

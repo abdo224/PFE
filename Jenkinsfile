@@ -3,10 +3,7 @@ pipeline {
     stages {
         stage('Build docker images ') {
             steps {
-                dir('./mysite'){
-                    sh ' sudo docker build -t djawed22/repo:latest . '
-                }
-            }
+              echo 'Building docker images...'
         }
         stage('Test') {
             steps {

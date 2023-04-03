@@ -20,7 +20,8 @@ pipeline {
             steps {
                 sh 'export KUBECONFIG=/etc/rancher/k3s/k3s.yaml'
                 sh 'kubectl get pods -n staging'
-                sh 'helm upgrade --install k8s-native-staging ./k8s-native-chart -f ./values.yaml --namespace staging'
+                sh 'ls -l'
+                //sh 'helm upgrade --install k8s-native-staging ./k8s-native-chart -f ./values.yaml --namespace staging'
 
                 
             }

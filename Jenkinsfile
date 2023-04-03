@@ -19,8 +19,8 @@ pipeline {
        stage('Deploy'){
             steps {
                 script {
-                    withKubeConfig([credentialsId: 'k8s', kubeconfigId: 'k8s']) {
-                        sh "export KUBECONFIG=/etc/rancher/k3s/k3s.yaml"
+                    withKubeConfig([credentialsId: 'k8s']) {
+                        
                         sh "helm list -n staging"
                     }
                 }

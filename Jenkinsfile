@@ -21,7 +21,7 @@ pipeline {
                 script {
                     withKubeConfig([credentialsId: 'k8s']) {
                         
-                        sh "helm upgrade --install k8s-native-staging ./k8-native-chart -f ./values-staging.yaml --namespace staging "
+                        sh "helm upgrade --install k8s-native-staging ./k8s-native-chart -f ./values.yaml --namespace staging "
                     }
                 }
 

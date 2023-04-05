@@ -2,15 +2,22 @@ pipeline {
     agent any
     stages {
         stage('Build docker images & puplish to docker hub registry') {
+             when {
+                 expression { BRANCH_NAME ==~ /(master|develop)/ }
+            }
             environment {
-                dockerHubRegistry = credentials('dockerhub')
+                dockerHubRegistry = 'dockerhub'
+                ImgTag= getImgTag(BRANCH_NAME)
+                appRegistry = 'djawed22/repo'
+
+
             }
             steps {
               dir('./mysite'){
                 script {
-                   docker.withRegistry( 'https://registry.hub.docker.com' , 'dockerhub') {
-                      def dockerImage = docker.build("djawed22/repo:latest","-f Dockerfile .")
-                      dockerImage.push()
+                   docker.withRegistry( 'https://registry.hub.docker.com' , dockerHubRegistry) {
+                      def dockerImage = docker.build(appRegistry + ":${ImgTag}","-f Dockerfile .")
+                      dockerImage.push("${ImgTag}")
                   }
                 }
              }
@@ -31,3 +38,27 @@ pipeline {
     
     }
   } 
+
+
+ def getImgTag(branchName) {
+     // This function return staging by default.
+     if(branchName == "master")  {
+         return "prod";
+     }
+     else {
+         return "staging";
+     }
+     
+}
+
+def getEnvName(branchName) {
+     // This function return staging by default.
+     if(branchName == "master")  {
+         return "prod";
+     }
+     // production branch is deployed manually in prod and automatically in preprod.
+     else {
+         return "staging";
+     }
+     
+}

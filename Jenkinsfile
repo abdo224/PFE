@@ -35,7 +35,7 @@ pipeline {
                 script {
                     withKubeConfig([credentialsId: 'k8s']) {
                         
-                        sh "sh ./k8s-native-chart/deploy.sh k8s-native ${EnvName}"
+                        sh "sh ./deploy.sh k8s-native ${EnvName}"
                     }
                 }
 

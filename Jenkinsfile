@@ -4,7 +4,7 @@ pipeline {
         
         stage('Build docker images & puplish to docker hub registry') {
             when {
-                 expression { BRANCH_NAME ==~ /(master|develop)/ }
+                 expression { BRANCH_NAME ==~ /(main|develop)/ }
             }
             environment {
                 dockerHubRegistry = 'dockerhub'
@@ -26,7 +26,7 @@ pipeline {
         }    
        stage('Deploy'){
             when {
-                 expression { BRANCH_NAME ==~ /(master|develop)/ }
+                 expression { BRANCH_NAME ==~ /(main|develop)/ }
             }
             environment {
                 EnvName = getEnvName(BRANCH_NAME)

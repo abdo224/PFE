@@ -1,0 +1,9 @@
+dependencies:
+- name: django
+  repository: file://charts/django-chart
+  version: 0.1.0
+- name: mysql
+  repository: https://charts.bitnami.com/bitnami
+  version: 9.6.0
+digest: sha256:fb128392022b349c32a12660072eabeb5f6407f97196dcba38e2a4dd5dcedc73
+generated: "2023-04-01T11:54:56.61693829Z"

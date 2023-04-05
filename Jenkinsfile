@@ -1,8 +1,9 @@
 pipeline {
     agent any
     stages {
+        
         stage('Build docker images & puplish to docker hub registry') {
-             when {
+            when {
                  expression { BRANCH_NAME ==~ /(master|develop)/ }
             }
             environment {
@@ -24,11 +25,17 @@ pipeline {
             }
         }    
        stage('Deploy'){
+            when {
+                 expression { BRANCH_NAME ==~ /(master|develop)/ }
+            }
+            environment {
+                EnvName = getEnvName(BRANCH_NAME)
+            }
             steps {
                 script {
                     withKubeConfig([credentialsId: 'k8s']) {
                         
-                        sh "helm upgrade --install k8s-native-staging ./k8s-native-chart -f ./values.yaml --namespace staging "
+                        sh "sh ./k8s-native-chart/deploy.sh k8s-native ${EnvName}"
                     }
                 }
 

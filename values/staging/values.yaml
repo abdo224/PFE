@@ -1,0 +1,22 @@
+# Default values for k8s-native-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+django:
+   name: django-app
+   # replicaCount: 1 if you want to ovveride the default value
+   image:
+     repository: djawed22/repo
+     tag: latest
+     pullPolicy: IfNotPresent
+   service:
+     type: NodePort
+     port: 8000
+     nodePort: 30001
+
+mysql:
+  fullnameOverride: mysql
+  auth:
+    username: djawed
+    password: djawed
+    rootPassword: djawed
+    database: django-app-db       

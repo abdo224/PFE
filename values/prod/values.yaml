@@ -11,7 +11,7 @@ django:
    service:
      type: NodePort
      port: 8000
-     nodePort: 30001
+     nodePort: 30002
 
 mysql:
   fullnameOverride: mysql

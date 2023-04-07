@@ -49,7 +49,7 @@ pipeline {
 
  def getImgTag(branchName) {
      // This function return staging by default.
-     if(branchName == "master")  {
+     if(branchName == "main")  {
          return "prod";
      }
      else {
@@ -60,7 +60,7 @@ pipeline {
 
 def getEnvName(branchName) {
      // This function return staging by default.
-     if(branchName == "master")  {
+     if(branchName == "main")  {
          return "prod";
      }
      // production branch is deployed manually in prod and automatically in preprod.

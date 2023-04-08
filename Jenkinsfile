@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        
+        // build and publish docker image in docker hub registry
         stage('Build docker images & puplish to docker hub registry') {
             when {
                  expression { BRANCH_NAME ==~ /(main|develop)/ }
@@ -15,6 +15,8 @@ pipeline {
             }
             steps {
               dir('./mysite'){
+                // clean up docker images
+                sh "docker system prune -y"
                 script {
                    docker.withRegistry( 'https://registry.hub.docker.com' , dockerHubRegistry) {
                       def dockerImage = docker.build(appRegistry + ":${ImgTag}","-f Dockerfile .")
@@ -23,7 +25,8 @@ pipeline {
                 }
              }
             }
-        }    
+        }
+       // deploy the helm chart in k3s cluster     
        stage('Deploy'){
             when {
                  expression { BRANCH_NAME ==~ /(main|develop)/ }
@@ -46,10 +49,10 @@ pipeline {
     }
   } 
 
-
- def getImgTag(branchName) {
+// define function to return the docker image tag  
+def getImgTag(branchName) {
      // This function return staging by default.
-     if(branchName == "main")  {
+     if(branchName == "master")  {
          return "prod";
      }
      else {
@@ -57,13 +60,13 @@ pipeline {
      }
      
 }
-
+// define function to return the environment name
 def getEnvName(branchName) {
      // This function return staging by default.
-     if(branchName == "main")  {
+     if(branchName == "master")  {
          return "prod";
      }
-     // production branch is deployed manually in prod and automatically in preprod.
+     
      else {
          return "staging";
      }

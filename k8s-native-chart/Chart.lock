@@ -5,5 +5,8 @@ dependencies:
 - name: mysql
   repository: https://charts.bitnami.com/bitnami
   version: 9.6.0
-digest: sha256:fb128392022b349c32a12660072eabeb5f6407f97196dcba38e2a4dd5dcedc73
-generated: "2023-04-01T11:54:56.61693829Z"
+- name: kube-prometheus-stack
+  repository: https://prometheus-community.github.io/helm-charts
+  version: 45.9.1
+digest: sha256:fd89235ab0167252d78d63da560b75eb0c3002df863a3863ec9180862390959f
+generated: "2023-04-08T11:34:51.167754324Z"

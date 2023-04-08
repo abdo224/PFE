@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        
+        // build and publish docker image in docker hub registry
         stage('Build docker images & puplish to docker hub registry') {
             when {
                  expression { BRANCH_NAME ==~ /(main|develop)/ }
@@ -15,6 +15,8 @@ pipeline {
             }
             steps {
               dir('./mysite'){
+                // clean up docker images
+                sh "docker system prune -y"
                 script {
                    docker.withRegistry( 'https://registry.hub.docker.com' , dockerHubRegistry) {
                       def dockerImage = docker.build(appRegistry + ":${ImgTag}","-f Dockerfile .")

@@ -52,7 +52,7 @@ pipeline {
 // define function to get docker image tag
 def getImgTag(branchName) {
      // This function return staging by default.
-     if(branchName == "master")  {
+     if(branchName == "main")  {
          return "prod";
      }
      else {
@@ -63,7 +63,7 @@ def getImgTag(branchName) {
 // define function to get environment name
 def getEnvName(branchName) {
      // This function return staging by default.
-     if(branchName == "master")  {
+     if(branchName == "main")  {
          return "prod";
      }
    

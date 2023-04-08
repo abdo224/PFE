@@ -16,7 +16,7 @@ pipeline {
             steps {
               dir('./mysite'){
                 // clean up docker images
-                sh "docker system prune -y"
+                sh "docker system prune -f"
                 script {
                    docker.withRegistry( 'https://registry.hub.docker.com' , dockerHubRegistry) {
                       def dockerImage = docker.build(appRegistry + ":${ImgTag}","-f Dockerfile .")
@@ -25,7 +25,8 @@ pipeline {
                 }
              }
             }
-        }    
+        }
+       // deploy the chart to k8s cluster     
        stage('Deploy'){
             when {
                  expression { BRANCH_NAME ==~ /(main|develop)/ }
@@ -48,8 +49,8 @@ pipeline {
     }
   } 
 
-
- def getImgTag(branchName) {
+// define function to get docker image tag
+def getImgTag(branchName) {
      // This function return staging by default.
      if(branchName == "master")  {
          return "prod";
@@ -59,13 +60,13 @@ pipeline {
      }
      
 }
-
+// define function to get environment name
 def getEnvName(branchName) {
      // This function return staging by default.
      if(branchName == "master")  {
          return "prod";
      }
-     // production branch is deployed manually in prod and automatically in preprod.
+   
      else {
          return "staging";
      }

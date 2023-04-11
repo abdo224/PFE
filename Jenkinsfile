@@ -32,7 +32,7 @@ pipeline {
              }
             }
         }
-       // deploy the chart to the k8s cluster     
+       // deploy the chart to the k8s cluster setup     
        stage('Deploy'){
             when {
                  expression { BRANCH_NAME ==~ /(main|develop)/ }

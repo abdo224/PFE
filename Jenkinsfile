@@ -32,7 +32,7 @@ pipeline {
              }
             }
         }
-       // deploy the helm chart in the k3s cluster     
+       // deploy the helm chart in the k3s cluster setup    
        stage('Deploy'){
             when {
                  expression { BRANCH_NAME ==~ /(main|develop)/ }

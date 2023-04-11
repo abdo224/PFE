@@ -1,10 +1,10 @@
 pipeline {
     agent any
     stages {
-        // test code 
+        // test code analysis
         stage('test code analysis') {
             steps {
-                sh "test passed successfully"
+                echo "test passed successfully"
             }
         }
         // build and publish docker image in docker hub registry

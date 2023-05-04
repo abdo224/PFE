@@ -1,8 +1,19 @@
 pipeline {
     agent any
     stages {
-        
-       
+        // build our app
+        stage('build'){
+            steps {
+                sh 'touch version.py'
+                sh 'python version.py'
+            }
+        }
+        // test our app
+        stage('test'){
+            steps {
+                sh 'python --version'
+            }
+        }
         // build and publish docker image in docker hub registry
         stage('Build docker images & puplish to docker hub registry') {
             when {
@@ -28,12 +39,7 @@ pipeline {
              }
             }
         }
-        // test code analysis
-         stage('test code analysis') {
-            steps {
-                echo 'test passed successfully'
-            }
-        }
+      
        // deploy the chart to the k8s cluster setup     
        stage('Deploy'){
             when {

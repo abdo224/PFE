@@ -1,12 +1,16 @@
 pipeline {
     agent any
     stages {
-        // test code analysis
-        stage('test code analysis') {
-            steps {
-                echo "test passed successfully"
-            }
+        // build our app
+        stage('build'){
+            sh 'touch version.py'
+            sh 'python version.py'
         }
+          // test code analysis
+        stage('test code analysis') {
+            sh 'python --version'
+        }
+      
         // build and publish docker image in docker hub registry
         stage('Build docker images & puplish to docker hub registry') {
             when {

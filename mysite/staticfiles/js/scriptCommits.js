@@ -206,7 +206,7 @@
                                                  data : dataCharts,
                                                  backgroundColor : 'rgb(55,140,255)',
                                                  borderWidth : 1 ,
-                                                 borderColor: '#777',
+                                                 borderColor: '#754',
                                                  hoverBorderWidth : 3,
                                                  hoverBorderColor : '#000'
                                              }

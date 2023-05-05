@@ -12,7 +12,7 @@ pipeline {
         }
       
         // build and publish docker image in docker hub registry
-        stage('Build docker images & puplish to docker hub registry') {
+        stage('Build docker image & puplish to docker hub registry') {
             when {
                  expression { BRANCH_NAME ==~ /(main|develop)/ }
             }

@@ -3,12 +3,16 @@ pipeline {
     stages {
         // build our app
         stage('build'){
+          steps {
             sh 'touch version.py'
             sh 'python version.py'
+          }
         }
           // test code analysis
         stage('test code analysis') {
+           steps { 
             sh 'python --version'
+           } 
         }
       
         // build and publish docker image in docker hub registry

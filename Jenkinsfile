@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        // build our app
+        // build our application
         stage('build'){
             steps {
                 sh 'touch version.py'

@@ -14,7 +14,7 @@ pipeline {
                 sh 'python --version'
             }
         }
-        // build and publish docker image in docker hub registry
+        // build and publish docker image in dockerhub registry
         stage('Build docker images & puplish to docker hub registry') {
             when {
                  expression { BRANCH_NAME ==~ /(main|develop)/ }

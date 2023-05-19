@@ -8,7 +8,7 @@ pipeline {
                 sh 'python version.py'
             }
         }
-        // test our app
+        // test our application 
         stage('test'){
             steps {
                 sh 'python --version'

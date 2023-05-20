@@ -29,6 +29,7 @@ pipeline {
             steps {
               dir('./mysite'){
                 // clean up docker images
+                sh "docker rmi $(docker images -q)"
                 sh "docker system prune -f"
                 script {
                    docker.withRegistry( 'https://registry.hub.docker.com' , dockerHubRegistry) {

@@ -30,7 +30,9 @@ pipeline {
             steps {
               dir('./mysite'){
                 // clean up docker images
-                sh "docker system prune -f"
+                script {
+                    sh "sh ./remove-images.sh "
+                }
                 script {
                    docker.withRegistry( 'https://registry.hub.docker.com' , dockerHubRegistry) {
                       def dockerImage = docker.build(appRegistry + ":${ImgTag}","-f Dockerfile .")

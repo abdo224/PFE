@@ -28,7 +28,7 @@ pipeline {
             }
             steps {
               dir('./mysite'){
-                // clean up docker images
+                // clean up all docker images
                 script {
                     sh "sh ./remove-images.sh"
                 }

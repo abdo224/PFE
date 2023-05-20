@@ -6,8 +6,8 @@ django:
    # replicaCount: 1 if you want to ovveride the default value
    image:
      repository: djawed22/repo
-     tag: latest
-     pullPolicy: IfNotPresent
+     tag: prod 
+     pullPolicy: Always
    service:
      type: NodePort
      port: 8000

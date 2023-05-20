@@ -29,7 +29,9 @@ pipeline {
             steps {
               dir('./mysite'){
                 // clean up docker images
-                sh 'docker rmi ${docker images -q}'
+                script {
+                    sh "sh ./remove-images.sh"
+                }
 
 
                 //sh "docker system prune -f"

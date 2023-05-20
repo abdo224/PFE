@@ -33,8 +33,6 @@ pipeline {
                     sh "sh ./remove-images.sh"
                 }
 
-
-                //sh "docker system prune -f"
                 script {
                    docker.withRegistry( 'https://registry.hub.docker.com' , dockerHubRegistry) {
                       def dockerImage = docker.build(appRegistry + ":${ImgTag}","-f Dockerfile .")

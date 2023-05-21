@@ -55,7 +55,7 @@
                          var overlay = document.getElementById('overlay')
                      
                          for(var i=0;i < donnes.length;i++){
-                             // get all repos
+                             // get all repos statuts
                             var L = (donnes[i].repos).length 
                             for(let j=0;j<L;j++){
                              var repo = await octokit.request('GET /repos/{owner}/{repo}',{

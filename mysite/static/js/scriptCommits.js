@@ -1,5 +1,5 @@
     
-             import { Octokit, App } from "https://cdn.skypack.dev/octokit";
+             import { Octokit, App } from  "https://cdn.skypack.dev/@octokit/core" //"https://cdn.skypack.dev/octokit";
              
             
              

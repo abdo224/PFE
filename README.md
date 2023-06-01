@@ -1,11 +1,11 @@
-# DESCRPTION
+## DESCRPTION
 this is my final year project consist of deploying a kubernetes-native application using helm chart.
 
-# K8S directiry 
+## K8S directiry 
 contains all kubernetes manifest files for deploying the django app along with mysql .
 *NB: we dont use this directory for deploying , we use it just for test purposes .
 
-# Complete Guide to use this repo
+## Complete Guide to use this repo
 @ first of all you need to have some prerequistes :
 
 1.Docker ----------> to be installed in your machine 
@@ -19,3 +19,5 @@ contains all kubernetes manifest files for deploying the django app along with m
 So start modify in the code and push it in your own repo , and Jenkins will do everything everything for you .
 
 
+@ To see our architecture deployment here is the figure as shown bellow 
+![alt text](https://github.com/abdo224/PFE/blob/develop/pipeline.png?raw=true)
